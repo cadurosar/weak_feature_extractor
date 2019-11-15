@@ -9,7 +9,7 @@ n_fft = 1024
 hop_length = 512
 n_mels = 128
 num_classes_model = 527
-pre_model_path = 'mx-h64-1024_0d3-1.17.pkl'
+pre_model_path = 'pretrained_model.pkl'
 layer_to_extract = 'layer18' # or layer 19 -  layer19 might not work well
 time_pool = torch.nn.functional.avg_pool2d # can use max also
 network_pool = torch.nn.functional.avg_pool2d # keep it fixed
@@ -152,7 +152,6 @@ def extract_features(_input,**kwargs):
 def main(filename,srate=44100):
 
     _input = file_to_input(filename,srate)
-    feature = extract_features(_input)
     extractor = get_extractor()   
     features = get_features(extractor,_input)
     features = features.cpu().numpy()
